@@ -66,13 +66,13 @@ Note: `region-beginning' and `region-end' are the reason why an
 
 \"The mark is not set now, so there is no region\"
 
-We check `mark-active' to avoid calling
-them when there's no region.
-We use `prefix-numeric-value' to always return a number and simplify the functions
+We check `(use-region-p)' to avoid calling
+them when there's no region or it's not appropriate using it.
+We use `prefix-numeric-value' to always return a number.
 "
     (list
-     (when mark-active (region-beginning)) ;; otherwise nil
-     (when mark-active (region-end))
+     (when (use-region-p) (region-beginning)) ;; otherwise nil
+     (when (use-region-p) (region-end))
      (prefix-numeric-value current-prefix-arg)))
 
 ;;;###autoload
